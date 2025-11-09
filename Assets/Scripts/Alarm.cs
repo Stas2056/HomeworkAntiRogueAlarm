@@ -4,37 +4,50 @@ using UnityEngine;
 public class Alarm : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
-    private float _volumeChangeSpeedModificator = 0.1f;
+    [SerializeField] private float _volumeChangeSpeed = 0.5f;
     private float _maxVolume = 1;
     private float _minVolume = 0;
     private Coroutine _coroutine;
 
-    private void OnTriggerEnter(Collider other)
+    public void Activate()
     {
+        CheckAndStopCoroutine();
+
+        if (_audioSource.isPlaying == false)
+        {
+            _audioSource.Play();
+        }
+
         _coroutine = StartCoroutine(SmoothSoundChange(_maxVolume));
     }
 
-    private void OnTriggerExit(Collider other)
+    public void Deactivate()
     {
-        StopCoroutine(_coroutine);
+        CheckAndStopCoroutine();
         _coroutine = StartCoroutine(SmoothSoundChange(_minVolume));
+    }
+
+    private void CheckAndStopCoroutine()
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
     }
 
     private IEnumerator SmoothSoundChange(float targetVolume)
     {
-        bool isWork = true;
-
-        while (isWork)
+        while (_audioSource.volume != targetVolume)
         {
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume,
-                                                    _volumeChangeSpeedModificator * Time.deltaTime);
-
-            if (_audioSource.volume == targetVolume)
-            {
-                isWork = false;
-            }
+                                                    _volumeChangeSpeed * Time.deltaTime);
 
             yield return null;
+        }
+
+        if (_audioSource.volume == 0)
+        {
+            _audioSource.Stop();
         }
     }
 }

@@ -321,6 +321,8 @@ GameObject:
   - component: {fileID: 1003478885}
   - component: {fileID: 1003478884}
   - component: {fileID: 1003478883}
+  - component: {fileID: 1003478888}
+  - component: {fileID: 1003478889}
   - component: {fileID: 1003478882}
   - component: {fileID: 1003478881}
   m_Layer: 0
@@ -341,7 +343,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d5c37230aad409e4e8dd779a656ff359, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
   Loop: 1
@@ -439,6 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1003478881}
+  _volumeChangeSpeed: 0.5
 --- !u!65 &1003478883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -519,12 +522,38 @@ Transform:
   m_GameObject: {fileID: 1003478880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -0.36, y: 3, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1003478888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003478880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40cd1c879b43ee44cad3061f583d151b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alarm: {fileID: 1003478882}
+  _invasionTtrigger: {fileID: 1003478889}
+--- !u!114 &1003478889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003478880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7dfa9614d32ff40a4abac7c23e9242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1177861987
 GameObject:
   m_ObjectHideFlags: 0
